@@ -127,14 +127,10 @@ SELECT COUNT(ride_id) - COUNT(distinct ride_id) ride_id,
 ```
 > ![brave_LqkZxL8LYg](https://github.com/user-attachments/assets/5f8803cb-bafd-455e-ae08-be95c0cfe346)
 
-There were duplicate values in every column. Some of these make sense (there are only a few value options available), but the one that caught my eye was ride_id, which should have been unique. 
+There were duplicate values in every column. Some of these make sense (there are only a few value options available), but the one that caught my eye was ride_id, which should have been unique. I noted this for cleaning later.
 
-```
-SELECT *
- FROM `2024_bikedata.combined_data`
- WHERE ride_id IN (SELECT ride_id FROM `2024_bikedata.combined_data` GROUP BY ride_id HAVING COUNT(*) > 1);
-```
-This query returned a table with all the trips that had duplicate ride_ids. All other data was duplicated for these entries, with some variability in precision of start and end times.
+
+### Cleaning
 
 ```
 -- Common Table Expression (CTE) to rank rows based on 'Name'
