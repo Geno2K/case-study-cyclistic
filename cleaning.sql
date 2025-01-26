@@ -54,9 +54,9 @@ CREATE TABLE IF NOT EXISTS `2024_bikedata.cleaned_combined_data` AS (
     JOIN (
       SELECT 
         ride_id, 
-        (EXTRACT(HOUR FROM (ended_at - started_at)) * 60 +
+        ROUND((EXTRACT(HOUR FROM (ended_at - started_at)) * 60 +
          EXTRACT(MINUTE FROM (ended_at - started_at)) +
-         EXTRACT(SECOND FROM (ended_at - started_at)) / 60) AS trip_duration
+         EXTRACT(SECOND FROM (ended_at - started_at)) / 60), 0) AS trip_duration
       FROM `2024_bikedata.combined_data`
     ) b 
     ON a.ride_id = b.ride_id
