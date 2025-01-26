@@ -27,6 +27,20 @@ CREATE TABLE IF NOT EXISTS `2024_bikedata.cleaned_combined_data` AS (
         WHEN 6 THEN 'FRI'
         WHEN 7 THEN 'SAT'    
       END AS day_of_week,
+      CASE EXTRACT(MONTH FROM started_at)
+        WHEN 1 THEN 'JAN'
+        WHEN 2 THEN 'FEB'
+        WHEN 3 THEN 'MAR'
+        WHEN 4 THEN 'APR'
+        WHEN 5 THEN 'MAY'
+        WHEN 6 THEN 'JUN'
+        WHEN 7 THEN 'JUL'
+        WHEN 8 THEN 'AUG'
+        WHEN 9 THEN 'SEP'
+        WHEN 10 THEN 'OCT'
+        WHEN 11 THEN 'NOV'
+        WHEN 12 THEN 'DEC'
+      END AS month,
       CASE
           WHEN (DATE(a.started_at) >= DATE(FORMAT_TIMESTAMP('%Y-03-19', a.started_at))
                 AND DATE(a.started_at) < DATE(FORMAT_TIMESTAMP('%Y-06-20', a.started_at))) THEN 'Spring'
