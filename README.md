@@ -233,9 +233,9 @@ WHERE (
 
 #### [Data Cleaning SQL Query](https://github.com/Geno2K/case-study-cyclistic/blob/main/cleaning.sql)
 
-> - Investigating the missing data was beyond the scope of this case study so for the purposes of continuing this analysis, all of those rows were removed, as were those with duplicate ride_ids, incorrect ride_id syntax, and implausible trip durations.
+> - Investigating the missing data was beyond the scope of this case study so for the purposes of continuing this analysis, all of those rows were removed, as were rows with duplicate ride_ids, incorrect ride_id syntax, and implausible trip durations.
 > - Some new columns were also created to facilitate analysis: trip_duration, day_of_week, month, and season.
-> - Number of removed rows was 1,695,592, leaving a total of 4,164,976 rows in our cleaned table.
+> - Number of removed rows was 1,695,592, leaving a new total of 4,164,976 rows in our cleaned table.
 
 ## Data Analysis:
 
