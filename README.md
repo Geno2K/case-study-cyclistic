@@ -4,11 +4,14 @@ In this case study, I will use historical data from a bike-share company in Chic
 
 ## Scenario:
 
-Cyclistic is a bike-share company started in 2016 that offers a large fleet of various bike offerings and stations across Chicago. They have two classes of typical customers: casual riders that use the bikes for single-rides or day passes and members that have purchased an annual membership.
+Cyclistic is a bike-share company started in 2016 that offers a large fleet of bike offerings with stations across Chicago. The company have two classes of customers: 
 
-The company has determined that they would like to convert more casual riders into members. Financial analysts have found that to be a more profitable segment that could drive future growth in the market, and the marketing director believes converting casual riders will be more fruitful than attracting new riders. 
+- Casual riders that use the bikes for single-rides or purchase day passes.
+- Members that have purchased an annual subscription.
 
-With that goal in mind, it’s my department’s job to look into rider data and find insights to inform the company’s marketing strategy going forward. The primary stakeholders in this case are the director of marketing, my boss, as well as the rest of the executive team at the company.
+The company's financial analysts have found their membership program to be a more profitable segment capable of driving future growth in the market, and the marketing director believes it will be easier to convert casual riders into members than attract new ones. 
+
+With that goal in mind, it’s my department’s job to look into the rider data and seek out insights to inform the company’s marketing strategy going forward. The primary stakeholders in this case are the director of marketing as well as the rest of the executive team at the company.
 
 The marketing team has been specifically tasked with answering three questions:
 
@@ -16,7 +19,7 @@ The marketing team has been specifically tasked with answering three questions:
 2. Why would casual riders buy Cyclistic annual memberships? 
 3. How can Cyclistic use digital media to influence casual riders to become members?
    
-For the scope of this case study, I am focused on just that first question. I will be looking into relevant data sets to identify patterns, develop profiles, and determine actionable insights that will help my team to come up with a marketing strategy to help convert more **casual riders** into **members**.
+For the scope of this case study, I am focused on just that first question. I will be looking into relevant data sets to identify patterns, develop profiles, and determine actionable insights that will help my team devise a marketing strategy to convert more **casual riders** into **members**.
 
 ## Business Task:
 
@@ -29,23 +32,27 @@ For this case study, I will be using bike trip data from January thru December 2
 The data is stored across 12 separate spreadsheets, one per month, titled the following:
 
 ```
-202401-divvy-tripdata.zip
-202402-divvy-tripdata.zip  
-202403-divvy-tripdata.zip  
-202404-divvy-tripdata.zip  
-202405-divvy-tripdata.zip  
-202406-divvy-tripdata.zip  
-202407-divvy-tripdata.zip 
-202408-divvy-tripdata.zip
-202409-divvy-tripdata.zip
-202410-divvy-tripdata.zip
-202411-divvy-tripdata.zip
-202412-divvy-tripdata.zip
+-- Files
+
+202401-divvy-tripdata.csv
+202402-divvy-tripdata.csv  
+202403-divvy-tripdata.csv  
+202404-divvy-tripdata.csv  
+202405-divvy-tripdata.csv  
+202406-divvy-tripdata.csv  
+202407-divvy-tripdata.csv 
+202408-divvy-tripdata.csv
+202409-divvy-tripdata.csv
+202410-divvy-tripdata.csv
+202411-divvy-tripdata.csv
+202412-divvy-tripdata.csv
 ```
 
-Each spreadsheet contains a record of every trip taken that month (rows). There are 13 fields containing data for each trip (columns). They are as follows:
+Each spreadsheet contains a record of every trip taken that month (rows). For each trip, there are 13 fields containing specific data (columns). They are as follows:
 
 ```
+-- Fields
+
 ride_id               	#Ride id – unique id
 rideable_type         	#Bike type – classic or electric
 started_at            	#Trip start day and time
@@ -65,21 +72,28 @@ Notably, this dataset contains information about the _membership status_ of the 
 
 ## Data Processing:
 
+Before going any further, I took some initial observations of the data to get some ideas for further investigation:
+
+#### Initial observations
+> - Can calculate ride duration for each trip to see if there are any correlations with membership status.
+> - Could look into a relationship between the bike type and membership status.
+> - May want to assess the makeup of membership status across different stations.
+> - Might be able to see if there are any correlations between membership and time of day the bikes are used.
+> - Similarly, can explore time of week and seasonality for insights.
+
 ### Setup
+---
+Initially using Microsoft Excel, I filtered the data to get an idea of what the fields contained, types of data stored, how much data was missing, and other general information about the spreadsheets.  
 
-Initially using Microsoft Excel, I was able to get a cursory glance at the data in the .CSV files. I filtered the data to get an idea of what the fields contained, types of data stored, how much data was missing, and other general information. 
+I quickly realized that the combined size of the data set would be well over a million rows though, beyond the scope of a spreadsheet analysis project, so I switched over to **SQL**.
 
-I quickly realized that the combined size of the data set would be well over a million rows, beyond the scope of a spreadsheet project, so at this point I decided to switch to **SQL**.
-
-I uploaded all 12 csv files to **BigQuery** via Google Cloud as tables in a dataset labeled `‘2024_bikedata’`. 
+I uploaded all 12 csv files to **BigQuery** via Google Cloud as tables in a dataset labeled `‘2024_bikedata’`.  Using [this SQL Query](https://github.com/Geno2K/case-study-cyclistic/blob/main/table_setup.sql), I created a single table labeled `‘combined_data’`, containing a total of 5,860,568 rows of data, a record of every recorded trip taken in 2024.
 
 ### Exploration
-
-[Using this SQL Query](https://github.com/Geno2K/case-study-cyclistic/blob/main/table_setup.sql), I created a single table labeled `‘combined_data’`, containing a total of 5,860,568 rows of data, a record of every recorded trip taken in 2024.
-
-> #### 5,860,568 total trips
-
+---
 ```
+-- List of data types
+
 SELECT column_name, data_type
 FROM `2024_bikedata`.INFORMATION_SCHEMA.COLUMNS
 WHERE table_name = 'combined_data';
@@ -88,8 +102,11 @@ WHERE table_name = 'combined_data';
 
 These were the data_types represented in the table.
 
+---
 
 ```
+-- Check for missing values
+
 SELECT COUNT(*) - COUNT(ride_id) ride_id,
  COUNT(*) - COUNT(rideable_type) rideable_type,
  COUNT(*) - COUNT(started_at) started_at,
@@ -107,9 +124,13 @@ SELECT COUNT(*) - COUNT(ride_id) ride_id,
 ```
 > ![brave_9l9WoGyyLW](https://github.com/user-attachments/assets/ed69d67a-1250-43cf-83fb-618ca9be5e9b)
 
-There were no missing values for many of the fields, but stations and ending coordinates had many missing values.
+There were no missing values for most of the fields, but stations and ending coordinates had many missing values.
+
+---
 
 ```
+-- Check for duplicate entries
+
 SELECT COUNT(ride_id) - COUNT(distinct ride_id) ride_id,
  COUNT(rideable_type) - COUNT(distinct rideable_type) rideable_type,
  COUNT(started_at) - COUNT(distinct started_at) started_at,
@@ -127,10 +148,99 @@ SELECT COUNT(ride_id) - COUNT(distinct ride_id) ride_id,
 ```
 > ![brave_LqkZxL8LYg](https://github.com/user-attachments/assets/5f8803cb-bafd-455e-ae08-be95c0cfe346)
 
-There were duplicate values in every column. Some of these make sense (there are only a few value options available), but the one that caught my eye was ride_id, which should have been unique. I noted this for cleaning later.
+There were duplicate values in every column. Some of these make sense (there are only a few bike types available, for instance), but ride_id should have been unique. 
+
+---
+
+```
+--Check membership status options
+
+SELECT DISTINCT member_casual, COUNT(member_casual) AS no_of_trips
+FROM `2024_bikedata.combined_data`
+GROUP BY member_casual;
+```
+> ![brave_lFnqYQAwYV](https://github.com/user-attachments/assets/cd6bae3d-9080-4345-b863-c08e08c1b387)
+
+Only two classes of membership, casual or member. Nothing unexpected there.
+
+---
+
+```
+-- Check bike type options
+
+SELECT DISTINCT rideable_type, COUNT(rideable_type) AS no_of_trips
+FROM `2024_bikedata.combined_data`
+GROUP BY rideable_type;
+```
+> ![brave_cpsnb3bsC7](https://github.com/user-attachments/assets/51b16cb8-7008-41dc-9a1f-a98921fed64e)
+
+Three types of offerings: bikes, electric bikes, and electric scooters. Electric bikes and classic bikes were much more common than scooters.
+
+---
+
+```
+-- Check ride_id lengths
+
+SELECT LENGTH(ride_id) AS length_ride_id, COUNT(ride_id) AS no_of_rows
+FROM `2024_bikedata.combined_data`
+GROUP BY length_ride_id;
+```
+> ![brave_CBQPBZLTtt](https://github.com/user-attachments/assets/8b8560cb-058d-4b6d-a453-d1763525bf4f)
+
+Mostly 16 digit ride_ids, only a handful of other lengths so those will need to be cleaned.
+
+---
+
+```
+-- Check for trips with ending times earlier than starting times
+
+SELECT COUNT(*) AS negative_rides
+FROM `2024_bikedata.combined_data`
+WHERE (
+  EXTRACT(HOUR FROM (ended_at - started_at)) * 60 +
+  EXTRACT(MINUTE FROM (ended_at - started_at)) +
+  EXTRACT(SECOND FROM (ended_at - started_at)) / 60) <= 0;
+```
+> ![brave_Iix8n41uyi](https://github.com/user-attachments/assets/e2dfe325-b5e5-4b15-8887-d4af81ba97a9)
+
+These trips have starting times later than their ending times, which isn't possible. Will need to be cleaned.
+
+---
+
+```
+-- Check for rides under a minute or over a day
+
+SELECT COUNT(*) AS less_than_a_minute
+FROM `2024_bikedata.combined_data`
+WHERE (
+  EXTRACT(HOUR FROM (ended_at - started_at)) * 60 +
+  EXTRACT(MINUTE FROM (ended_at - started_at)) +
+  EXTRACT(SECOND FROM (ended_at - started_at)) / 60) BETWEEN 0 AND 1;
+
+SELECT COUNT(*) AS more_than_a_day
+FROM `2024_bikedata.combined_data`
+WHERE (
+  EXTRACT(HOUR FROM (ended_at - started_at)) * 60 +
+  EXTRACT(MINUTE FROM (ended_at - started_at)) +
+  EXTRACT(SECOND FROM (ended_at - started_at)) / 60) >= 1440;
+```
+> ![brave_doStAKjIOA](https://github.com/user-attachments/assets/7bacce68-c9bd-4a08-8abf-619f80ea30f6)
+> ![brave_iTRAQjO8rp](https://github.com/user-attachments/assets/8c2a822d-f15d-461c-b25f-402e71cdcfb4)
+
 
 
 ### Cleaning
+
+- Data Cleaning SQL Query
+
+Investigating the missing data was beyond the scope of this case study, so for the purposes of analysis all of those rows were removed, as were those with duplicate ride_ids, incorrect ride_id syntax, and implausible trip durations. 
+
+Some new columns were also created to facilitate analysis: trip_duration, day_of_week, and season.
+
+Number of removed rows was 1,694,137, leaving a total of 4,166,431 rows in our now cleaned data table.
+
+
+### Analysis
 
 ```
 -- Common Table Expression (CTE) to rank rows based on 'Name'
