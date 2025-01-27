@@ -1,15 +1,15 @@
 # Case Study for Google Data Analytics: Cyclistic Bike Share
 
-In this case study, I will use historical data from a bike-share company in Chicago, identifying trends in ridership in order to deliver actionable insights that will inform the company’s marketing strategy going forward.
+In this case study, I will analyze historical data from a bike-share company in Chicago, identifying trends in ridership in order to deliver actionable insights that will inform the company’s marketing strategy going forward.
 
 ## Scenario:
 
-Cyclistic is a bike-share company started in 2016 that offers a large fleet of bike offerings with stations across Chicago. The company have two classes of customers: 
+Cyclistic is a bike-share company started in 2016 that offers a large fleet of bikes with stations across Chicago. The company has two classes of customers: 
 
-- Casual riders that use the bikes for single-rides or purchase day passes.
+- Casual riders that use the bikes for single-rides or day passes.
 - Members that have purchased an annual subscription.
 
-The company's financial analysts have found their membership program to be a more profitable segment capable of driving future growth in the market, and the marketing director believes it will be easier to convert casual riders into members than attract new ones. 
+The company's financial analysts have determined that the membership program is a more profitable segment capable of driving future growth in the market, and is therefore seeking ways to expand it. The company's marketing director believes it will be easier to convert casual riders into members than attract new customers directly. 
 
 With that goal in mind, it’s my department’s job to look into the rider data and seek out insights to inform the company’s marketing strategy going forward. The primary stakeholders in this case are the director of marketing as well as the rest of the executive team at the company.
 
@@ -27,7 +27,7 @@ For the scope of this case study, I am focused on just that first question. I wi
 
 ## Data Source:
 
-For this case study, I will be using bike trip data from January thru December 2024, publicly available [here](https://divvy-tripdata.s3.amazonaws.com/index.html). The data has been made available by Motivate International Inc. under [this license](https://www.divvybikes.com/data-license-agreement). 
+For this case study, I will be using bike trip data from January thru December 2024, publicly accessible [here](https://divvy-tripdata.s3.amazonaws.com/index.html). The data has been made available by Motivate International Inc. under [this license](https://www.divvybikes.com/data-license-agreement). 
 
 The data is stored across 12 separate spreadsheets, one per month, titled the following:
 
@@ -54,7 +54,7 @@ Each spreadsheet contains a record of every trip taken that month (rows). For ea
 -- Fields
 
 ride_id               	#Ride id – unique id
-rideable_type         	#Bike type – classic or electric
+rideable_type         	#Bike type – classic, electric, scooter
 started_at            	#Trip start day and time
 ended_at              	#Trip end day and time
 start_station_name      #Trip start station
@@ -72,25 +72,28 @@ Notably, this dataset contains information about the _membership status_ of the 
 
 ## Data Processing:
 
-Before going any further, I took some initial observations of the data to get some ideas for further investigation:
+Before going any further, I took some initial observations of the data and considered how it could be used to accomplish my task:
 
-#### Initial observations
+#### Initial considerations
 > - Can calculate ride duration for each trip to see if there are any correlations with membership status.
 > - Could look into a relationship between the bike type and membership status.
 > - May want to assess the makeup of membership status across different stations.
 > - Might be able to see if there are any correlations between membership and time of day the bikes are used.
-> - Similarly, can explore time of week and seasonality for insights.
+> - Similarly, can explore day of week and seasonality for insights.
+
+It was clear the dataset had a lot of interesting insights that could be gleaned from it, but I'd need to do a little prep work first.
 
 ### Setup
 ---
-Initially using Microsoft Excel, I filtered the data to get an idea of what the fields contained, types of data stored, how much data was missing, and other general information about the spreadsheets.  
+I initially used Microsoft Excel, filtering the data to get an idea of what the fields contained, types of data stored, if data was missing, and other general information about the spreadsheets.  
 
-I quickly realized that the combined size of the data set would be well over a million rows though, beyond the scope of a spreadsheet analysis project, so I switched over to **SQL**.
+I quickly realized that the combined size of the data set would be over a million rows though, well beyond the scope of a spreadsheet analysis project, so I switched over to **SQL** to proceed with the case study.
 
 I uploaded all 12 csv files to **BigQuery** via Google Cloud as tables in a dataset labeled `‘2024_bikedata’`.  Using [this SQL Query](https://github.com/Geno2K/case-study-cyclistic/blob/main/table_setup.sql), I created a single table labeled `‘combined_data’`, containing a total of 5,860,568 rows of data, a record of every recorded trip taken in 2024.
 
 ### Exploration
 ---
+With the dataset uploaded and combined into a single table, I began to write some queries to explore it and prepare it for analysis.
 ```
 -- List of data types
 
@@ -187,7 +190,7 @@ GROUP BY length_ride_id;
 ```
 > ![brave_CBQPBZLTtt](https://github.com/user-attachments/assets/8b8560cb-058d-4b6d-a453-d1763525bf4f)
 
-Mostly 16 digit ride_ids, only a handful of other lengths so those will need to be cleaned.
+Mostly 16 digit ride_ids, but a handful of other lengths that needed to be cleaned.
 
 ---
 
@@ -227,9 +230,11 @@ WHERE (
 > ![brave_doStAKjIOA](https://github.com/user-attachments/assets/7bacce68-c9bd-4a08-8abf-619f80ea30f6)
 > ![brave_iTRAQjO8rp](https://github.com/user-attachments/assets/8c2a822d-f15d-461c-b25f-402e71cdcfb4)
 
-
+I decided that any trip lasting under a minute or over a day was implausible, or certainly outside of normal usage worth consideration, so these entries will need to be removed as well.
 
 ### Cleaning
+
+Using what I discovered exploring the data, I put together the following query to clean up the data and return a new table that I could use to begin analysis proper.
 
 #### [Data Cleaning SQL Query](https://github.com/Geno2K/case-study-cyclistic/blob/main/cleaning.sql)
 
@@ -239,4 +244,20 @@ WHERE (
 
 ## Data Analysis:
 
+Before hopping into some visualizations, I decided to run some basic queries to check on the relationships I was curious about during my initial observations. Specifically, I wanted to see the relationships between membership status and each of the following:
+- Total Rides
+- Bike Type
+- Ride Duration
+- Time of Day
+- Day of Week
+- Season
+- Starting/Ending Station
 
+I compiled all my analysis queries into the following:
+> [Data Analysis SQL Query]()
+
+The raw results were illuminating, so I decided to move over to **Microsoft Power BI** to iterate further and put together visualizations from the results.
+
+## Share
+
+After importing my dataset into Power BI, I was able to use it to create some visualizations of the results of my analysis.
