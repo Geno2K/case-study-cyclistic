@@ -244,7 +244,7 @@ Using what I discovered exploring the data, I put together the following query t
 
 ## Data Analysis:
 
-Before hopping into some visualizations, I decided to run some basic queries to check on the relationships I was curious about during my initial observations. Specifically, I wanted to see the relationships between membership status and each of the following:
+Before hopping into visualizations, I decided to run some basic queries to check on those relationships I was curious about during my initial observations. Specifically, I wanted to see the relationships between membership status and each of the following:
 - Total Rides
 - Bike Type
 - Ride Duration
@@ -255,6 +255,8 @@ Before hopping into some visualizations, I decided to run some basic queries to 
 
 I compiled all my analysis queries into the following:
 > [Data Analysis SQL Query]()
+>
+> -remove this just go straight to power bi
 
 The raw results were illuminating, so I decided to move over to **Microsoft Power BI** to iterate further and put together visualizations from the results.
 
