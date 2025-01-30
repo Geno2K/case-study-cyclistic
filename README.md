@@ -308,7 +308,7 @@ Lastly, I wanted to look into the relationship between membership status and tim
 
 First, an overall picture of usage by season:
 
-![PBIDesktop_Nm0nxTOlZJ](https://github.com/user-attachments/assets/0c1438d3-ac91-4ad9-a5ce-fa0509d3b0f2)
+![PBIDesktop_suuiNsmFMH](https://github.com/user-attachments/assets/d423fe5a-d1a0-444e-baee-1eeb7079ae1b)
 
 Summer was by far the most popular season, which makes a lot of sense in a city like Chicago where the weather can be brutal in winter. I wanted to get a little more granular though, so I took a look at the data by month:
 
