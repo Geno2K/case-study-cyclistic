@@ -254,7 +254,7 @@ With the dataset now cleaned, I decided to hop over to **Microsoft Power BI** to
 > - Might be able to see if there are any correlations between membership and time of day the bikes are used.
 > - Similarly, can explore day of week and seasonality for insights.
 
-I imported the BigQuery dataset into Power BI tackled these one at a time. Along the way, I also created a couple additional columns via DAX to assist with sort order, as well as one column to represent each season as an Emoji for a future visualization. I found the results illuminating! 
+I imported the BigQuery dataset into Power BI to tackle these one at a time. I found the results illuminating! 
 
 ## Share
 
@@ -264,7 +264,7 @@ First, I took a look into trip frequency and duration:
 
 ![PBIDesktop_DWOJf6osVC](https://github.com/user-attachments/assets/ccbe95b2-3ee2-49ff-a640-57bd89728336)
 
-It's immediately clear that there's a sizable disparity here between frequency and duration. Members account for a large majority of the number of trips, but actually spent less time overall on the bikes.
+It's immediately clear that there's a sizable disparity here between frequency and duration. Members account for a large majority of the number of trips, but actually spent less time overall on the bikes than their casual counterparts.
 
 ![PBIDesktop_LFYQDR84EH](https://github.com/user-attachments/assets/df27e2d1-a0d7-4f18-b2fa-92a18dde3396)
 
@@ -292,7 +292,7 @@ Here is where things get really interesting. Even though casual riders typically
 
 ---
 
-I decided to next look into the geographic data available. Using the coordinates available, I put together some heat maps for start and end locations:
+I decided to next look into the geographic data. Using the coordinates available, I put together some heat maps for start and end locations:
 
 ![Map-Casual](https://github.com/user-attachments/assets/54ca5f3b-1934-4e5d-9007-9efc592c153f)
 
@@ -320,7 +320,7 @@ We see the same usage preference for the summer months here, but interestingly t
 
 ![PBIDesktop_fl3lKU3Qyc](https://github.com/user-attachments/assets/14c072a9-796b-4d2f-83b5-7c34c88267ef)
 
-These charts were particularly striking to me. The weekly data very clearly shows that member usage is well spread out across the week while casual usage is extremely concentrated on the weekends. Further, the daily data shows clear spikes in member usage around the 8AM and 5PM hours, while casual usage is more evenly distributed throughout daylight hours. All of the above charts point towards the same final conclusion:
+These charts were particularly striking. The weekly data very clearly shows that member usage is well spread out across the week while casual usage is extremely concentrated on the weekends. Further, the daily data shows clear spikes in member usage around the 8AM and 5PM hours, while casual usage is more evenly distributed throughout daylight hours. All of the above charts point towards the same final conclusion:
 
 > **Conclusion #4: Members are more likely to use Cyclistic bikes for their daily commute. Casual riders use them more for recreation.**
 
@@ -335,18 +335,22 @@ These charts were particularly striking to me. The weekly data very clearly show
 
 ## Act:
 
-#### Having identified several key differences between casual riders and members, I've come up with three recommendations using this data to help the company convert casuals into members:
+Having identified several key differences between these two groups, I've put together three recommendations to help the company convert casual riders into members:
 
-1. **Create a market campaign showcasing the benefits of bike-share for commuting.**
+1. **Create a marketing campaign showcasing the benefits of bike-share for commuting.**
 
-> Members seem to see a lot of value in using the service for their daily commute, so it makes sense to run a marketing campaign to persuade casual riders that it might be a good option for them as well.
+> Members seem to see a lot of value in using the service for their daily commute, so it makes sense to attempt to persuade casual riders that it might be a good option for them as well. For example, the company could highlight the benefits of ride-share availability, station access, and share success stories from existing members.
 
 2. **Target casual riders where they are by offering membership perks for recreational usage.**
 
-> As the above may not be an option for many casual riders, the company could also offer unique perks for recreational use as well. Partnering with local businesses to offer discounts on complementary value-adds, like ice cream shops or pizza places could be a good place to start.
+> As the above may not be an option for every casual rider, the company could also offer unique perks for their recreational customers as well. Partnering with local businesses to offer discounts on complementary services like ice cream shops or pizza places could be a good place to start.
 
-3. **Offer a cheaper, but more limited membership option.**
+3. **Offer a cheaper, but more limited membership option to increase the value of the membership for sporadic use.**
 
-> It would be important to target this membership tier very specifically to reach new customers as the company certainly wouldn't want existing members to downgrade to a cheaper plan. Offering seasonal memberships for example might be a bad idea as even regular members use the service less in the winter. A better idea would be to offer weekend-only or scooter-only memberships. These options would be less attractive to existing members but could theoretically convert many casual riders.
+> It would be important to target this membership tier specifically towards casual riders as the company certainly wouldn't want existing members unneccessarily downgrading to a cheaper plan. Offering seasonal memberships for example sounds tempting but might be a bad idea as even regular members use the service less over winter. A better idea might be to offer weekend-only or scooter-only memberships. These options are less attractive to existing members but might prove popular with casual recreational riders.
+
+---
+
+I hope you find as much value in this case study as I did putting it together. Thank you for reading!
 
 ![bikes](https://github.com/user-attachments/assets/3ee80382-a6f8-42bb-96ea-60dea05e0ef4)
