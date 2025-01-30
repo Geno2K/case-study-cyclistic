@@ -1,3 +1,5 @@
+![Case Study](https://github.com/user-attachments/assets/a1b21c0f-3364-4021-8095-46754dbcd41b)
+
 # Case Study for Google Data Analytics: Cyclistic Bike Share
 
 In this case study, I will analyze historical data from a bike-share company in Chicago, identifying trends in ridership in order to deliver actionable insights that will inform the company’s marketing strategy going forward.
@@ -244,7 +246,7 @@ Using what I discovered exploring the data, I put together the following query t
 
 ## Data Analysis:
 
-With the dataset now cleaned, I decided to hop over to **Microsoft Power BI** to begin my analysis. I wanted to start by revisting my initial considerations about the data from when I first explored it:
+With the dataset now cleaned, I decided to hop over to **Microsoft Power BI** to begin my analysis. I wanted to start by revisting my initial considerations about the data from when I first explored it. As a refresher:
 
 > - Can calculate ride frequency & duration to see if there are any correlations with membership status.
 > - Could look into a relationship between the bike type and membership status.
@@ -262,3 +264,89 @@ First, I took a look into trip frequency and duration:
 
 ![PBIDesktop_DWOJf6osVC](https://github.com/user-attachments/assets/ccbe95b2-3ee2-49ff-a640-57bd89728336)
 
+It's immediately clear that there's a sizable disparity here between frequency and duration. Members account for a large majority of the number of trips, but actually spent less time overall on the bikes.
+
+![PBIDesktop_LFYQDR84EH](https://github.com/user-attachments/assets/df27e2d1-a0d7-4f18-b2fa-92a18dde3396)
+
+We see further confirmation of this in the average trip duration. 
+
+> **Conclusion #1: Casual riders tend to take longer trips on Cyclistic bikes than members.**
+
+---
+
+Next up, a look into the data relationships with different types of bike offerings:
+
+![PBIDesktop_49uwFWKpXi](https://github.com/user-attachments/assets/9b633aa0-6767-44a0-b72e-1f2164bc39db)
+
+It's clear that classic bikes are far and away the most used offering followed distantly by electric bikes, with electric scooters lagging even further behind. This relationship is less extreme in number of trips, but still holds.
+
+![PBIDesktop_ovrvP24R5k](https://github.com/user-attachments/assets/c530af32-28a0-4102-9793-dfa516b9758a)
+
+That overall usage is at least partially accounted for by the average trip duration of each offering. Classic bikes are taken out for longer while both electric offerings are used for short trips.
+
+![PBIDesktop_WPaYgDHtt2](https://github.com/user-attachments/assets/e319cc0d-019c-40e8-8bec-2fbd58f29d00)
+
+Here is where things get really interesting. Even though casual riders typically ride for longer than members and scooters are typically used for short trips, casual members seem to really like using them. They are the only option more popular with casual riders than with members.
+
+> **Conclusion #2: Electric scooters are more popular with casual riders than with members; bikes are much more popular with members than with casual riders.**
+
+---
+
+I decided to next look into the geographic data available. Using the coordinates available, I put together some heat maps for start and end locations:
+
+![Map-Casual](https://github.com/user-attachments/assets/54ca5f3b-1934-4e5d-9007-9efc592c153f)
+
+![Map-Member](https://github.com/user-attachments/assets/6bb950a3-0840-441e-a438-dfa2e3902116)
+
+The differences here are fairly subtle. The majority of usage occurs in central Chicago with a second hotspot in uptown near Wrigley Field, but members do have a wider area of secondary usage further out in the suburbs. This seems to indicate that members may be using the rentals for travel to and from the city proper more often than casual riders.
+
+> **Conclusion #3: Member bike usage is more geographically spread out than casual rider usage.**
+
+---
+
+Lastly, I wanted to look into the relationship between membership status and time; I charted bike usage over the course of a year, of a week, and of a day to see if anything would stand out.
+
+First, an overall picture of usage by season:
+
+![PBIDesktop_Nm0nxTOlZJ](https://github.com/user-attachments/assets/0c1438d3-ac91-4ad9-a5ce-fa0509d3b0f2)
+
+Summer was by far the most popular season, which makes a lot of sense in a city like Chicago where the weather can be brutal in winter. I wanted to get a little more granular though, so I took a look at the data by month:
+
+![PBIDesktop_K8sIMFKVEx](https://github.com/user-attachments/assets/2fa41b0e-a5d8-47c7-9cdd-704dc7ea34d3)
+
+We see the same usage preference for the summer months here, but interestingly the effect is less pronounced for members than it is for casual riders. This suggests that member usage may be for more routine purposes that are less influenced by the weather, like a daily work commute. Drilling down into the weekly and daily data could help to clarify:
+
+![PBIDesktop_5EYpkkuGyy](https://github.com/user-attachments/assets/3177043c-5e67-453e-aa04-74da514e4d39)
+
+![PBIDesktop_fl3lKU3Qyc](https://github.com/user-attachments/assets/14c072a9-796b-4d2f-83b5-7c34c88267ef)
+
+These charts were particularly striking to me. The weekly data very clearly shows that member usage is well spread out across the week while casual usage is extremely concentrated on the weekends. Further, the daily data shows clear spikes in member usage around the 8AM and 5PM hours, while casual usage is more evenly distributed throughout daylight hours. All of the above charts point towards the same final conclusion:
+
+> **Conclusion #4: Members are more likely to use Cyclistic bikes for their daily commute. Casual riders use them more for recreation.**
+
+### Summary of findings
+
+| Casuals | Members |
+| ------- | ------- |
+| Typically take longer, more sporadic trips. | Typically take shorter, more routine trips. |
+| Mostly ride bikes, but relatively more interest in scooters. | Greatly favor bikes, little interest in using scooters. |
+| Mainly ride in the city proper. | Ride from and to the surrounding areas as well as within the city. |
+| Primarily ride for recreation, over the weekends in the summer. | Primarily ride for commute, throughout the week and year. |
+
+## Act:
+
+#### Having identified several key differences between casual riders and members, I've come up with three recommendations using this data to help the company convert casuals into members:
+
+1. **Create a market campaign showcasing the benefits of bike-share for commuting.**
+
+> Members seem to see a lot of value in using the service for their daily commute, so it makes sense to run a marketing campaign to persuade casual riders that it might be a good option for them as well.
+
+2. **Target casual riders where they are by offering membership perks for recreational usage.**
+
+> As the above may not be an option for many casual riders, the company could also offer unique perks for recreational use as well. Partnering with local businesses to offer discounts on complementary value-adds, like ice cream shops or pizza places could be a good place to start.
+
+3. **Offer a cheaper, but more limited membership option.**
+
+> It would be important to target this membership tier very specifically to reach new customers as the company certainly wouldn't want existing members to downgrade to a cheaper plan. Offering seasonal memberships for example might be a bad idea as even regular members use the service less in the winter. A better idea would be to offer weekend-only or scooter-only memberships. These options would be less attractive to existing members but could theoretically convert many casual riders.
+
+![bikes](https://github.com/user-attachments/assets/3ee80382-a6f8-42bb-96ea-60dea05e0ef4)
