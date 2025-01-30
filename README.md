@@ -244,22 +244,21 @@ Using what I discovered exploring the data, I put together the following query t
 
 ## Data Analysis:
 
-Before hopping into visualizations, I decided to run some basic queries to check on those relationships I was curious about during my initial observations. Specifically, I wanted to see the relationships between membership status and each of the following:
-- Total Rides
-- Bike Type
-- Ride Duration
-- Time of Day
-- Day of Week
-- Season
-- Starting/Ending Station
+With the dataset now cleaned, I decided to hop over to **Microsoft Power BI** to begin my analysis. I wanted to start by revisting my initial considerations about the data from when I first explored it:
 
-I compiled all my analysis queries into the following:
-> [Data Analysis SQL Query]()
->
-> -remove this just go straight to power bi
+> - Can calculate ride frequency & duration to see if there are any correlations with membership status.
+> - Could look into a relationship between the bike type and membership status.
+> - May want to assess the makeup of membership status across different stations.
+> - Might be able to see if there are any correlations between membership and time of day the bikes are used.
+> - Similarly, can explore day of week and seasonality for insights.
 
-The raw results were illuminating, so I decided to move over to **Microsoft Power BI** to iterate further and put together visualizations from the results.
+I imported the BigQuery dataset into Power BI tackled these one at a time. Along the way, I also created a couple additional columns via DAX to assist with sort order, as well as one column to represent each season as an Emoji for a future visualization. I found the results illuminating! 
 
 ## Share
 
-After importing my dataset into Power BI, I was able to use it to create some visualizations of the results of my analysis.
+First, I took a look into trip frequency and duration:
+
+![PBIDesktop_E8dAAmKlHi](https://github.com/user-attachments/assets/c7b226fd-a90c-48ce-8d43-ee9045efe897)
+
+![PBIDesktop_DWOJf6osVC](https://github.com/user-attachments/assets/ccbe95b2-3ee2-49ff-a640-57bd89728336)
+
