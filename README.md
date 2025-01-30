@@ -298,7 +298,7 @@ I decided to next look into the geographic data. Using the coordinates available
 
 ![Map-Member](https://github.com/user-attachments/assets/6bb950a3-0840-441e-a438-dfa2e3902116)
 
-The differences here are fairly subtle. The majority of usage occurs in central Chicago with a second hotspot in uptown near Wrigley Field, but members do have a wider area of secondary usage further out in the suburbs. This seems to indicate that members may be using the rentals for travel to and from the city proper more often than casual riders.
+The differences here are fairly subtle. The majority of usage occurs in central Chicago with a second hotspot in uptown near Wrigley Field, but members do have a wider area of secondary usage further out in the suburbs and the south side. This seems to indicate that members may be using the rentals for travel to and from the city proper more often than casual riders.
 
 > **Conclusion #3: Member bike usage is more geographically spread out than casual rider usage.**
 
@@ -323,6 +323,8 @@ We see the same usage preference for the summer months here, but interestingly t
 These charts were particularly striking. The weekly data very clearly shows that member usage is well spread out across the week while casual usage is extremely concentrated on the weekends. Further, the daily data shows clear spikes in member usage around the 8AM and 5PM hours, while casual usage is more evenly distributed throughout daylight hours. All of the above charts point towards the same final conclusion:
 
 > **Conclusion #4: Members are more likely to use Cyclistic bikes for their daily commute. Casual riders use them more for recreation.**
+
+---
 
 ### Summary of findings
 
