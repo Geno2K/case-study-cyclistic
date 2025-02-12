@@ -1,4 +1,4 @@
-![Case Study](https://github.com/user-attachments/assets/a1b21c0f-3364-4021-8095-46754dbcd41b)
+![Case Study](https://github.com/user-attachments/assets/c369a814-3c0e-47c2-9379-228df14e13ac)
 
 # Case Study for Google Data Analytics: Cyclistic Bike Share
 
