@@ -1,7 +1,7 @@
 
 ![banner](https://github.com/user-attachments/assets/ee102e27-c095-489b-b350-d61d1403d551)
 
-# Case Study for Google Data Analytics: Cyclistic Bike Share
+# Data Analytics Case Study: Cyclistic Bike Share
 
 In this case study, I will analyze historical data from a bike-share company in Chicago, identifying trends in ridership in order to deliver actionable insights that will inform the company’s marketing strategy going forward.
 
